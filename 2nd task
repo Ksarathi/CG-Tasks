@@ -1,0 +1,22 @@
+public ResponseEntity<Book> createBook(@RequestBody Book book) {
+  
+    if (book.getTitle() == null || book.getTitle().isEmpty()) {
+        return ResponseEntity.badRequest().build();
+    }
+    if (book.getAuthor() == null || book.getAuthor().isEmpty()) {
+        return ResponseEntity.badRequest().build();
+    }
+    if (book.getIsbn() == null || book.getIsbn().isEmpty()) {
+        return ResponseEntity.badRequest().build();
+    }
+    if (book.getGenre() == null || book.getGenre().isEmpty()) {
+        return ResponseEntity.badRequest().build();
+    }
+    if (book.getPublicationYear() == null) {
+        return ResponseEntity.badRequest().build();
+    }
+
+    Book newBook = bookRepository.save(book);
+
+    return ResponseEntity.ok(newBook);
+}
